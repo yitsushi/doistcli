@@ -6,11 +6,13 @@ import (
 )
 
 func main() {
-	_, err := parseConfiguration()
+	conf, err := parseConfiguration()
 
 	if err != nil {
 		panic(err)
 	}
+
+	api.SetToken(conf.APIToken)
 
 	project := &api.Project{
 		Name: "Test Project With API",
