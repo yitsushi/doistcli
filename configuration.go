@@ -43,6 +43,8 @@ func (this *Configuration) checkApiTokenIsExists() {
 		return
 	}
 
+	fmt.Println("You can find your API Token under your account on todoist.com")
+	fmt.Println("  Settings -> Todoist Settings -> Account -> API token")
 	fmt.Print("API Token: ")
 	fmt.Scanf("%s", &this.APIToken)
 
