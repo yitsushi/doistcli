@@ -1,15 +1,27 @@
 package main
 
 import (
-	"log"
+	"github.com/yitsushi/doistcli/api"
+	//	"log"
 )
 
 func main() {
-	conf, err := parseConfiguration()
+	_, err := parseConfiguration()
 
 	if err != nil {
 		panic(err)
 	}
 
-	log.Println(conf)
+	project := &api.Project{
+		Name: "Test Project With API",
+	}
+	newProject := api.ProjectAdd{
+		Project: project,
+	}
+
+	action := newProject.Prepare()
+
+	action.Send()
+
+	//log.Println(conf, action)
 }
