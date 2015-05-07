@@ -10,6 +10,7 @@ import (
 
 var configurationFile string
 
+// Configuration is the data structure of the configuration file
 type Configuration struct {
 	APIToken string `json:"api_key"`
 }
@@ -33,26 +34,26 @@ func parseConfiguration() (*Configuration, error) {
 		}
 	}
 
-	conf.checkApiTokenIsExists()
+	conf.checkAPITokenIsExists()
 
 	return &conf, nil
 }
 
-func (this *Configuration) checkApiTokenIsExists() {
-	if this.APIToken != "" {
+func (c *Configuration) checkAPITokenIsExists() {
+	if c.APIToken != "" {
 		return
 	}
 
 	fmt.Println("You can find your API Token under your account on todoist.com")
 	fmt.Println("  Settings -> Todoist Settings -> Account -> API token")
 	fmt.Print("API Token: ")
-	fmt.Scanf("%s", &this.APIToken)
+	fmt.Scanf("%s", &c.APIToken)
 
-	this.save()
+	c.save()
 }
 
-func (this *Configuration) save() {
-	jsonContent, err := json.Marshal(this)
+func (c *Configuration) save() {
+	jsonContent, err := json.Marshal(c)
 	if err != nil {
 		panic(fmt.Sprintf("Can not encode the configuration file. (%s)\n", err))
 	}
